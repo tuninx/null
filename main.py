@@ -145,7 +145,7 @@ les_enabled = True
 peshera_enabled = False
 corovan_enabled = True
 order_enabled = True
-auto_def_enabled = False
+auto_def_enabled = True
 donate_enabled = False
 quest_fight_enabled = True
 
@@ -183,7 +183,7 @@ def queue_worker():
                 if arena_delay and arena_delay_day != datetime.now(tz).day:
                     arena_delay = False
                 lt_info = time()
-                get_info_diff = random.randint(10200, 11400)
+                get_info_diff = random.randint(2400, 3000)
                 if bot_enabled:
                     send_msg('@', bot_username, orders['hero'])
                 continue
