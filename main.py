@@ -145,7 +145,7 @@ les_enabled = True
 peshera_enabled = False
 corovan_enabled = True
 order_enabled = True
-auto_def_enabled = True
+auto_def_enabled = False
 donate_enabled = False
 quest_fight_enabled = True
 
