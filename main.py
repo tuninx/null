@@ -94,6 +94,7 @@ orders = {
     'hero': '🏅Герой',
     'corovan': '/go',
     'peshera': '🕸Пещера',
+    'bereg': '🏝Побережье',
     'quests': '🗺 Квесты',
     'castle_menu': '🏰Замок',
     'lavka': '🏚Лавка',
@@ -150,6 +151,7 @@ les_enabled = True
 peshera_enabled = False
 corovan_enabled = True
 order_enabled = True
+bereg_enabled = False
 auto_def_enabled = False
 donate_enabled = False
 quest_fight_enabled = True
@@ -210,6 +212,7 @@ def parse_text(text, username, message_id):
     global arena_enabled
     global les_enabled
     global peshera_enabled
+    global bereg_enabled
     global corovan_enabled
     global order_enabled
     global auto_def_enabled
@@ -306,6 +309,10 @@ def parse_text(text, username, message_id):
             elif les_enabled and not peshera_enabled and endurance >= 1 and orders['les'] not in action_list and text.find('🛌Отдых') != -1:
                 action_list.append(orders['quests'])
                 action_list.append(orders['les'])
+                
+            elif bereg_enabled and endurance >= 1 and orders['bereg'] not in action_list and text.find('🛌Отдых') != -1:
+                action_list.append(orders['quests'])
+                action_list.append(orders['bereg'])    
 
             elif arena_enabled and not arena_delay and gold >= 5 and not arena_running and text.find('🛌Отдых') != -1:
                 curhour = datetime.now(tz).hour
@@ -380,6 +387,8 @@ def parse_text(text, username, message_id):
                     '#disable_les - Выключить лес',
                     '#enable_peshera - Включить пещеры',
                     '#disable_peshera - Выключить пещеры',
+                    '#enable_bereg - Включить побережье',
+                    '#disable_bereg - Выключить побережье',
                     '#enable_corovan - Включить корован',
                     '#disable_corovan - Выключить корован',
                     '#enable_order - Включить приказы',
@@ -437,6 +446,14 @@ def parse_text(text, username, message_id):
             elif text == '#disable_peshera':
                 peshera_enabled = False
                 send_msg(pref, msg_receiver, 'Пещеры успешно выключены')
+                
+            # Вкл/выкл bereg
+            elif text == '#enable_bereg':
+                bereg_enabled = True
+                send_msg(pref, msg_receiver, 'Побережье успешно включено')
+            elif text == '#disable_bereg':
+                bereg_enabled = False
+                send_msg(pref, msg_receiver, 'Побережье успешно выключено')    
 
             # Вкл/выкл корована
             elif text == '#enable_corovan':
